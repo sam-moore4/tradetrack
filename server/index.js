@@ -1,37 +1,21 @@
-import express from "express";
-import bodyParser from "body-parser";
-import mongoose from "mongoose";
-import cors from "cors";
-import dotenv from "dotenv";
-import helmet from "helmet";
-import morgan from "morgan";
-import tradingRoutes from "./routes/trading";
-import generalRoutes from "./routes/general";
-import adminRoutes from "./routes/admin";
-import statsRoutes from "./routes/stats";
-
-//data imports
-
-import User from "./models/User.js";
-import { dataUser } from "./data/index.js";
-
-/* CONFIGURATION */
-dotenv.config(); //set up environment variables
+const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
+require("dotenv").config();
+
+// parsse requests of content-type - application/json
+
 app.use(express.json());
-app.use(helmet());
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-app.use(morgan("common"));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
 
 /* ROUTES */
-
-app.use("/trading", tradingRoutes); //Investments Held, Investment List, Trades(Transactions), Geography
-app.use("/general", generalRoutes); //Users and Dashboard
-app.use("/stats", statsRoutes); //Historical Transactions/ Daily/Monthly/Breakdown
-app.use("/admin", adminRoutes); //Management Admin
+// let tradingRoutes = require("./routes/trading");
+let userRoutes = require("./routes/user");
+// let statsRoutes = require("./routes/stats");
+// let adminRoutes = require("./routes/admin");
+// app.use("/trading", tradingRoutes); //Investments Held, Investment List, Trades(Transactions), Geography
+app.use("/users", userRoutes); //Users and Dashboard
+// app.use("/stats", statsRoutes); //Historical Transactions/ Daily/Monthly/Breakdown
+// app.use("/admin", adminRoutes); //Management Admin
 
 /* MONGOOSE SETUP */
 
@@ -44,7 +28,5 @@ mongoose
   })
   .then(() => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
-
-    User.insertMany(dataUser);
   })
   .catch((error) => console.log(`${error} did not connect`));

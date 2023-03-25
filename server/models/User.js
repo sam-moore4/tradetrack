@@ -1,33 +1,17 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const UserSchema = new mongoose.SchemaType(
-  {
-    name: {
-      type: String,
-      required: true,
-      min: 2,
-      max: 100,
-    },
-    email: {
-      type: String,
-      required: true,
-      max: 50,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-      min: 5,
-    },
-    city: { type: String, required: true },
-    state: { type: String, required: true },
-    country: { type: String, required: true },
+const user = new Schema({
+  name: { type: String, trim: true, required: true },
+  email: { type: String, trim: true, required: true, unique: true },
+  password: { type: String, trim: true, required: true },
+  city: { type: String, required: true },
+  state: { type: String, required: true },
+  country: { type: String, required: true },
+  occupation: { type: String, required: false },
+  phoneNumber: { type: String, required: false },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
+});
 
-    occupation: { type: String, required: false },
-    phoneNumber: String,
-    transactions: Array,
-  },
-  { timestamps: true }
-);
-
-const User = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("user", user);
