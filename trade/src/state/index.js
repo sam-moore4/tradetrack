@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setAuth } from "../actions/authActions";
 
 const initialState = {
   mode: "dark",
-  userId: "63701cc1f03239c72c00017f",
+  userId: null,
 };
 
 export const globalSlice = createSlice({
@@ -12,6 +13,11 @@ export const globalSlice = createSlice({
     setMode: (state) => {
       state.mode = state.mode === "light" ? "dark" : "light";
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(setAuth, (state, action) => {
+      state.userId = action.payload.token;
+    });
   },
 });
 

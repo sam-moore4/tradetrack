@@ -3,11 +3,11 @@ let router = express.Router();
 let Controllers = require("../controllers");
 
 router.get("/", (req, res) => {
-  Controllers.userController.getUser(res);
+  Controllers.stockController.getStock(res);
 });
 
 router.post("/create", (req, res) => {
-  Controllers.userController.createUser(req.body, res);
+  Controllers.stockController.createStock(req.body, res);
 });
 
 module.exports = router;

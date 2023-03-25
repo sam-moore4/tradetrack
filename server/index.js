@@ -1,21 +1,23 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 require("dotenv").config();
 
-// parsse requests of content-type - application/json
+// // parse requests of content-type - application/json
 
 app.use(express.json());
 
+//data imports
+let options = require("./data/stocklist.js");
+let stocks = require("./models/stocks.js");
+
 /* ROUTES */
-// let tradingRoutes = require("./routes/trading");
+
 let userRoutes = require("./routes/user");
-// let statsRoutes = require("./routes/stats");
-// let adminRoutes = require("./routes/admin");
-// app.use("/trading", tradingRoutes); //Investments Held, Investment List, Trades(Transactions), Geography
-app.use("/users", userRoutes); //Users and Dashboard
-// app.use("/stats", statsRoutes); //Historical Transactions/ Daily/Monthly/Breakdown
-// app.use("/admin", adminRoutes); //Management Admin
+let stockRoutes = require("./routes/stocks");
+app.use("/users", userRoutes); //Users
+app.use("/stocks", stockRoutes); //Stock List
 
 /* MONGOOSE SETUP */
 
