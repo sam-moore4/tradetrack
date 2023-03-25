@@ -10,6 +10,11 @@ import generalRoutes from "./routes/general";
 import adminRoutes from "./routes/admin";
 import statsRoutes from "./routes/stats";
 
+//data imports
+
+import User from "./models/User.js";
+import { dataUser } from "./data/index.js";
+
 /* CONFIGURATION */
 dotenv.config(); //set up environment variables
 const app = express();
@@ -39,5 +44,7 @@ mongoose
   })
   .then(() => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+
+    User.insertMany(dataUser);
   })
   .catch((error) => console.log(`${error} did not connect`));
