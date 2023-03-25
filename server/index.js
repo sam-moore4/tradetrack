@@ -5,10 +5,10 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
-import tradeRoutes from "./routes/trade.js";
-import generalRoutes from "./routes/general.js";
-import managementRoutes from "./routes/management.js";
-import historyRoutes from "./routes/history.js";
+import tradingRoutes from "./routes/trading";
+import generalRoutes from "./routes/general";
+import adminRoutes from "./routes/admin";
+import statsRoutes from "./routes/stats";
 
 /* CONFIGURATION */
 dotenv.config(); //set up environment variables
@@ -23,10 +23,10 @@ app.use(cors());
 
 /* ROUTES */
 
-app.use("/trade", tradeRoutes); //Investments Held, Investment List, Trades(Transactions), Geography
+app.use("/trading", tradingRoutes); //Investments Held, Investment List, Trades(Transactions), Geography
 app.use("/general", generalRoutes); //Users and Dashboard
-app.use("/history", historyRoutes); //Historical Transactions/ Daily/Monthly/Breakdown
-app.use("/management", managementRoutes); //Management Admin
+app.use("/stats", statsRoutes); //Historical Transactions/ Daily/Monthly/Breakdown
+app.use("/admin", adminRoutes); //Management Admin
 
 /* MONGOOSE SETUP */
 
