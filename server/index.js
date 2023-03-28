@@ -1,11 +1,12 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
 // // parse requests of content-type - application/json
-
+app.use(cors());
 app.use(express.json());
 
 //data imports

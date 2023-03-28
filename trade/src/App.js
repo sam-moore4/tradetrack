@@ -7,6 +7,7 @@ import { themeSettings } from "theme";
 import Layout from "scenes/layout";
 import Dashboard from "scenes/dashboard";
 import Login from "scenes/login";
+import Signup from "scenes/signup";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -20,6 +21,7 @@ function App() {
             <Route>
               <Route path="/" element={<Navigate to="/login" replace />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
             </Route>
             <Route element={<Layout />}>
               <Route path="/" element={<Navigate to="/login" replace />} />
