@@ -17,8 +17,10 @@ let stocks = require("./models/stocks.js");
 
 let userRoutes = require("./routes/user");
 let stockRoutes = require("./routes/stocks");
+let tradesRoutes = require("./routes/trades");
 app.use("/users", userRoutes); //Users
 app.use("/stocks", stockRoutes); //Stock List
+app.use("/trades", tradesRoutes); //Trade List
 
 /* MONGOOSE SETUP */
 

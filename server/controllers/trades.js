@@ -1,25 +1,25 @@
 "use strict";
 let Models = require("../models"); //matches index.js
 
-const getUser = (res) => {
+const getTrades = (res) => {
   //finds all users
-  Models.User.find({})
+  Models.Trades.find({})
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => console.log(err.message));
 };
 
-const createUser = (data, res) => {
+const createTrades = (data, res) => {
   //creates a new user using JSON data POSTed in request body
   console.log(data);
-  new Models.User(data)
+  new Models.Trades(data)
     .save()
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => console.log(err.message));
 };
 
-const updateUser = (req, res) => {
+const updateTrades = (req, res) => {
   console.log(req.body);
-  Models.User.findByIdAndUpdate(req.params.id, req.body, {
+  Models.Trades.findByIdAndUpdate(req.params.id, req.body, {
     useFindAndModify: false,
   })
     .then((data) => res.send({ result: 200, data: data }))
@@ -30,7 +30,7 @@ const updateUser = (req, res) => {
 };
 
 module.exports = {
-  getUser,
-  createUser,
-  updateUser,
+  getTrades,
+  createTrades,
+  updateTrades,
 };

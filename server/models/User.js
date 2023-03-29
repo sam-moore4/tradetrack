@@ -10,6 +10,13 @@ const user = new Schema({
   country: { type: String, required: true },
   occupation: { type: String, required: false },
   phoneNumber: { type: String, required: false },
+  trades: [
+    {
+      stockId: { type: String },
+      direction: { type: String },
+      price: { type: Number },
+    },
+  ],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
