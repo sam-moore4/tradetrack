@@ -9,6 +9,7 @@ import Dashboard from "scenes/dashboard";
 import Investments from "scenes/investments";
 import Login from "scenes/login";
 import Signup from "scenes/signup";
+import NewInvestment from "components/NewInvestment";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -28,6 +29,7 @@ function App() {
               <Route path="/" element={<Navigate to="/login" replace />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/investments" element={<Investments />} />
+              <Route path="/addnewinvestment" element={<NewInvestment />} />
             </Route>
           </Routes>
         </ThemeProvider>

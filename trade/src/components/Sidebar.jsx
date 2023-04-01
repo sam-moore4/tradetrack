@@ -102,6 +102,8 @@ const Sidebar = ({
   const navigate = useNavigate();
   const theme = useTheme();
 
+  const name = localStorage.getItem("userName");
+
   useEffect(() => {
     setActive(pathname.substring(1));
   }, [pathname]);
@@ -139,6 +141,18 @@ const Sidebar = ({
                     <ChevronLeft />
                   </IconButton>
                 )}
+              </FlexBetween>
+            </Box>
+            <Box
+              m="2rem 2rem 3rem"
+              display="flex"
+              alignItems="center"
+              gap="0.5rem"
+            >
+              <FlexBetween>
+                <Typography variant="h6" fontWeight="bold">
+                  Welcome back {name}
+                </Typography>
               </FlexBetween>
             </Box>
             <List>

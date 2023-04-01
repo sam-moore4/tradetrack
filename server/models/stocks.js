@@ -16,6 +16,7 @@ const stocks = new mongoose.Schema({
   },
   "Last Sale": {
     type: String,
+    required: true,
   },
   "Net Change": {
     type: Number,

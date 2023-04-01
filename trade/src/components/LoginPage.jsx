@@ -54,6 +54,8 @@ const Login = () => {
       .then((data) => {
         const user = data.data.find((user) => user.email === email);
         if (user && user.password === password) {
+          localStorage.setItem("userId", user._id);
+          localStorage.setItem("userName", user.name);
           navigate("/dashboard");
         } else {
           setErrorMessage("Invalid email or password");

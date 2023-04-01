@@ -21,7 +21,9 @@ const Layout = () => {
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
         />
-        <Outlet />
+        <Box display="flex" justifyContent="center">
+          <Outlet />
+        </Box>
       </Box>
     </Box>
   );
