@@ -9,7 +9,6 @@ const getTrades = (res) => {
 };
 
 const createTrades = (data, res) => {
-  //creates a new user using JSON data POSTed in request body
   console.log(data);
   new Models.Trades(data)
     .save()

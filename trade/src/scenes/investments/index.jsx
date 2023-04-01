@@ -14,6 +14,10 @@ import {
   Pagination,
   TextField,
   Modal,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Header from "../../components/Header";
@@ -50,18 +54,30 @@ const Investment = ({
     setOpen(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newInvestment = {
-      userId: userId,
-      stockId: stockId,
-      stockName: stockName,
-      direction: direction,
-      price: price,
-      date: date,
-    };
-    setOpen(false);
-    console.log(newInvestment);
+    const response = await fetch("http://localhost:5001/trades/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: userId,
+        stockId: stockId,
+        lastsale: LastSale,
+        stockName: stockName,
+        direction: direction,
+        price: price,
+        date: date,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -123,16 +139,19 @@ const Investment = ({
             </Typography>
             <Box>
               <Typography variant="h4"> {stockName} </Typography>
-              <TextField
-                required
-                id="direction"
-                label="Direction"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                value={direction}
-                onChange={(e) => setDirection(e.target.value)}
-              />
+              <FormControl variant="outlined" fullWidth mb={2}>
+                <InputLabel id="direction-label">Direction</InputLabel>
+                <Select
+                  labelId="direction-label"
+                  id="direction"
+                  value={direction}
+                  onChange={(e) => setDirection(e.target.value)}
+                  label="Direction"
+                >
+                  <MenuItem value="buy">Buy</MenuItem>
+                  <MenuItem value="sell">Sell</MenuItem>
+                </Select>
+              </FormControl>
               <TextField
                 required
                 id="price"

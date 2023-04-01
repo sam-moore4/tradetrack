@@ -10,6 +10,7 @@ import Investments from "scenes/investments";
 import Login from "scenes/login";
 import Signup from "scenes/signup";
 import NewInvestment from "components/NewInvestment";
+import Active from "scenes/active";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -28,6 +29,7 @@ function App() {
             <Route element={<Layout />}>
               <Route path="/" element={<Navigate to="/login" replace />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/active" element={<Active />} />
               <Route path="/investments" element={<Investments />} />
               <Route path="/addnewinvestment" element={<NewInvestment />} />
             </Route>

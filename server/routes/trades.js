@@ -6,6 +6,10 @@ router.get("/", (req, res) => {
   Controllers.tradesController.getTrades(res);
 });
 
+router.get("/:userId", (req, res) => {
+  Controllers.tradesController.getUserTrades(res);
+});
+
 router.post("/create", (req, res) => {
   Controllers.tradesController.createTrades(req.body, res);
 });
