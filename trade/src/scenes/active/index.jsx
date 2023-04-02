@@ -8,11 +8,13 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  IconButton,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import axios from "axios";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import DoNotDisturbAltIcon from "@mui/icons-material/DoNotDisturbAlt";
 
 const Active = () => {
   const userId = localStorage.getItem("userId");
@@ -51,6 +53,7 @@ const Active = () => {
               <TableCell>Current Price</TableCell>
               <TableCell>P/L</TableCell>
               <TableCell></TableCell>
+              <TableCell>Close</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -76,6 +79,11 @@ const Active = () => {
                     ) : (
                       <ArrowDownwardIcon style={{ color: "red" }} />
                     )}
+                  </TableCell>
+                  <TableCell>
+                    <IconButton>
+                      <DoNotDisturbAltIcon />
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               );

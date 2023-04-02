@@ -10,6 +10,8 @@ const trades = new Schema({
   direction: { type: String, trim: true, required: true },
   price: { type: String, required: true },
   date: { type: Date, required: true },
+  isClosed: { type: String, required: true },
+  country: { type: String, require: true },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });

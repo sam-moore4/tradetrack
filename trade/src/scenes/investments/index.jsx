@@ -43,6 +43,8 @@ const Investment = ({
   const [stockId, setStockId] = useState(_id);
   const [stockName, setStockName] = useState(Name);
   const [symbol, setSymbol] = useState(Symbol);
+  const [country, setCountry] = useState(Country);
+  const [isClosed, setIsClosed] = useState("N");
   const [direction, setDirection] = useState("");
   const [price, setPrice] = useState("");
   const [date, setDate] = useState("");
@@ -71,11 +73,14 @@ const Investment = ({
         direction: direction,
         price: price,
         date: date,
+        isClosed: isClosed,
+        country: country,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        handleClose();
       })
       .catch((error) => {
         console.log(error);
