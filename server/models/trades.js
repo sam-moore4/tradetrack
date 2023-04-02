@@ -11,6 +11,7 @@ const trades = new Schema({
   price: { type: String, required: true },
   date: { type: Date, required: true },
   isClosed: { type: String, required: true },
+  quantity: { type: Number, required: true },
   country: { type: String, require: true },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },

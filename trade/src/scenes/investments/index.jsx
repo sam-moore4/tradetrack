@@ -46,6 +46,7 @@ const Investment = ({
   const [country, setCountry] = useState(Country);
   const [isClosed, setIsClosed] = useState("N");
   const [direction, setDirection] = useState("");
+  const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [date, setDate] = useState("");
 
@@ -71,6 +72,7 @@ const Investment = ({
         lastsale: LastSale,
         stockName: stockName,
         direction: direction,
+        quantity: quantity,
         price: price,
         date: date,
         isClosed: isClosed,
@@ -160,6 +162,16 @@ const Investment = ({
                   <MenuItem value="sell">Sell</MenuItem>
                 </Select>
               </FormControl>
+              <TextField
+                required
+                id="quantity"
+                label="Quantity"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+              />
               <TextField
                 required
                 id="price"

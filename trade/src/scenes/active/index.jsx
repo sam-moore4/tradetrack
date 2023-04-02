@@ -28,13 +28,35 @@ const Active = () => {
       .catch((error) => console.error(error));
   }, []);
 
-  const filteredTrades = data.filter((trade) => trade.userId === userId);
+  const filteredTrades = data.filter(
+    (trade) => trade.userId === userId && trade.isClosed === "N"
+  );
 
   const formatDirection = (direction) =>
     direction.charAt(0).toUpperCase() + direction.slice(1);
 
   const formatCurrency = (value) => {
     return isNaN(value) ? "-" : `$${value.toFixed(2)}`;
+  };
+
+  const setIsClosed = (tradeId) => {
+    const confirmClose = window.confirm(
+      "Are you sure you want to close this trade?"
+    );
+    if (confirmClose) {
+      axios
+        .put(`http://localhost:5001/trades/${tradeId}`, {
+          isClosed: "Y",
+        })
+        .then((response) => {
+          // update data state after successful PUT request
+          const updatedData = data.map((trade) =>
+            trade._id === tradeId ? { ...trade, isClosed: "Y" } : trade
+          );
+          setData(updatedData);
+        })
+        .catch((error) => console.error(error));
+    }
   };
 
   return (
@@ -49,7 +71,9 @@ const Active = () => {
               <TableCell>Symbol</TableCell>
               <TableCell>Stock Name</TableCell>
               <TableCell>Direction</TableCell>
+              <TableCell>Quantity</TableCell>
               <TableCell>Price Bought/Sold</TableCell>
+              <TableCell>Total Value</TableCell>
               <TableCell>Current Price</TableCell>
               <TableCell>P/L</TableCell>
               <TableCell></TableCell>
@@ -58,11 +82,18 @@ const Active = () => {
           </TableHead>
           <TableBody>
             {filteredTrades.map((trade) => {
+              const getTotalValue = (price, quantity) => {
+                return isNaN(price) || isNaN(quantity)
+                  ? "-"
+                  : formatCurrency(price * quantity);
+              };
               const { price, lastsale, direction } = trade;
               const pl =
                 formatDirection(direction) === "Sell"
-                  ? parseFloat(price) - parseFloat(lastsale.slice(1))
-                  : parseFloat(lastsale.slice(1)) - parseFloat(price);
+                  ? (parseFloat(price) - parseFloat(lastsale.slice(1))) *
+                    trade.quantity
+                  : (parseFloat(lastsale.slice(1)) - parseFloat(price)) *
+                    trade.quantity;
               const plFormatted = pl.toFixed(2);
               const isPositive = pl > 0;
               return (
@@ -70,7 +101,11 @@ const Active = () => {
                   <TableCell>{trade.symbol}</TableCell>
                   <TableCell>{trade.stockName}</TableCell>
                   <TableCell>{formatDirection(trade.direction)}</TableCell>
+                  <TableCell>{trade.quantity}</TableCell>
                   <TableCell>${trade.price}</TableCell>
+                  <TableCell>
+                    {getTotalValue(parseFloat(trade.price), trade.quantity)}
+                  </TableCell>
                   <TableCell>{trade.lastsale}</TableCell>
                   <TableCell>{formatCurrency(pl)}</TableCell>
                   <TableCell>
@@ -81,7 +116,7 @@ const Active = () => {
                     )}
                   </TableCell>
                   <TableCell>
-                    <IconButton>
+                    <IconButton onClick={() => setIsClosed(trade._id)}>
                       <DoNotDisturbAltIcon />
                     </IconButton>
                   </TableCell>
