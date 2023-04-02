@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const trades = new Schema({
   userId: { type: String, trim: true, required: true, unique: false },
   stockId: { type: String, trim: true, required: true, unique: false },
+  symbol: { type: String, trum: true, required: true, unique: false },
   lastsale: { type: String, trim: true, required: true },
   stockName: { type: String, trim: true, required: true },
   direction: { type: String, trim: true, required: true },

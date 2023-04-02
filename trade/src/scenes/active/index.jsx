@@ -1,13 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { Box, useTheme } from "@mui/material";
-import Header from "../../components/Header";
-import { DataGrid } from "@mui/x-data-grid";
+import { useEffect, useState } from "react";
+import {
+  Box,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import axios from "axios";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 const Active = () => {
-  const theme = useTheme();
   const userId = localStorage.getItem("userId");
   const [data, setData] = useState([]);
+  const theme = useTheme();
 
   useEffect(() => {
     axios
@@ -18,46 +28,61 @@ const Active = () => {
 
   const filteredTrades = data.filter((trade) => trade.userId === userId);
 
-  const columns = [
-    {
-      field: "_id",
-      headerName: "ID",
-      flex: 2,
-    },
-    {
-      field: "stockName",
-      headerName: "Stock Name",
-      flex: 2,
-    },
-    {
-      field: "direction",
-      headerName: "Direction",
-      flex: 2,
-    },
-    {
-      field: "lastsale",
-      headerName: "Current Price",
-      flex: 1,
-    },
-    {
-      field: "price",
-      headerName: "Price",
-      flex: 1,
-    },
-  ];
+  const formatDirection = (direction) =>
+    direction.charAt(0).toUpperCase() + direction.slice(1);
 
-  console.log(filteredTrades);
+  const formatCurrency = (value) => {
+    return isNaN(value) ? "-" : `$${value.toFixed(2)}`;
+  };
 
   return (
     <Box m="1.5rem 2.5rem">
-      <Header title="ACTIVE TRADES" subtitle="Your active trades"></Header>
-      <Box mt="40px" height="75vph">
-        <DataGrid
-          rows={filteredTrades}
-          getRowId={(row) => row._id}
-          columns={columns}
-        />
-      </Box>
+      <TableContainer
+        component={Paper}
+        sx={{ backgroundColor: theme.palette.primary[500] }}
+      >
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Symbol</TableCell>
+              <TableCell>Stock Name</TableCell>
+              <TableCell>Direction</TableCell>
+              <TableCell>Price Bought/Sold</TableCell>
+              <TableCell>Current Price</TableCell>
+              <TableCell>P/L</TableCell>
+              <TableCell></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {filteredTrades.map((trade) => {
+              const { price, lastsale, direction } = trade;
+              const pl =
+                formatDirection(direction) === "Sell"
+                  ? parseFloat(price) - parseFloat(lastsale.slice(1))
+                  : parseFloat(lastsale.slice(1)) - parseFloat(price);
+              const plFormatted = pl.toFixed(2);
+              const isPositive = pl > 0;
+              return (
+                <TableRow key={trade._id}>
+                  <TableCell>{trade.symbol}</TableCell>
+                  <TableCell>{trade.stockName}</TableCell>
+                  <TableCell>{formatDirection(trade.direction)}</TableCell>
+                  <TableCell>${trade.price}</TableCell>
+                  <TableCell>{trade.lastsale}</TableCell>
+                  <TableCell>{formatCurrency(pl)}</TableCell>
+                  <TableCell>
+                    {isPositive ? (
+                      <ArrowUpwardIcon style={{ color: "green" }} />
+                    ) : (
+                      <ArrowDownwardIcon style={{ color: "red" }} />
+                    )}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Box>
   );
 };

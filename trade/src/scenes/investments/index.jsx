@@ -42,6 +42,7 @@ const Investment = ({
   const [open, setOpen] = useState(false);
   const [stockId, setStockId] = useState(_id);
   const [stockName, setStockName] = useState(Name);
+  const [symbol, setSymbol] = useState(Symbol);
   const [direction, setDirection] = useState("");
   const [price, setPrice] = useState("");
   const [date, setDate] = useState("");
@@ -64,6 +65,7 @@ const Investment = ({
       body: JSON.stringify({
         userId: userId,
         stockId: stockId,
+        symbol: symbol,
         lastsale: LastSale,
         stockName: stockName,
         direction: direction,
@@ -139,6 +141,7 @@ const Investment = ({
             </Typography>
             <Box>
               <Typography variant="h4"> {stockName} </Typography>
+              <Typography variant="h4"> {symbol} </Typography>
               <FormControl variant="outlined" fullWidth mb={2}>
                 <InputLabel id="direction-label">Direction</InputLabel>
                 <Select
