@@ -230,7 +230,7 @@ const Stocks = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(30);
+  const [perPage, setPerPage] = useState(32);
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
   const theme = useTheme();
 

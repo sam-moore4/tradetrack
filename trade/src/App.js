@@ -11,6 +11,8 @@ import Login from "scenes/login";
 import Signup from "scenes/signup";
 import NewInvestment from "components/NewInvestment";
 import Active from "scenes/active";
+import History from "scenes/history";
+import Geography from "scenes/geography";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -31,7 +33,9 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/active" element={<Active />} />
               <Route path="/investments" element={<Investments />} />
+              <Route path="/history" element={<History />} />
               <Route path="/addnewinvestment" element={<NewInvestment />} />
+              <Route path="/geography" element={<Geography />} />
             </Route>
           </Routes>
         </ThemeProvider>
