@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { PieChart, Pie, Legend, Tooltip } from "recharts";
 import { useTheme } from "@mui/material/styles";
+import Header from "../../components/Header";
 
 const Geography = () => {
   const userId = localStorage.getItem("userId");
@@ -57,61 +58,70 @@ const Geography = () => {
   console.log(pieChartData);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        flexDirection: { xs: "column", md: "row" },
-      }}
-    >
-      <Box m="1.5rem 2.5rem">
-        <TableContainer
-          component={Paper}
-          sx={{ backgroundColor: theme.palette.primary[500] }}
-        >
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Country</TableCell>
-                <TableCell>Total Trades</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {tradesByCountry.map((country) => (
-                <TableRow key={country.id}>
-                  <TableCell>{country.id}</TableCell>
-                  <TableCell>{country.value}</TableCell>
-                </TableRow>
-              ))}
-              <TableRow>
-                <TableCell>Total</TableCell>
-                <TableCell>
-                  {tradesByCountry.reduce(
-                    (acc, country) => acc + country.value,
-                    0
-                  )}
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Box>
+    <Box>
       <Box>
-        <PieChart width={400} height={400}>
-          <Pie
-            data={pieChartData}
-            cx="50%"
-            cy="50%"
-            labelLine={false}
-            label={(entry) => entry.id}
-            outerRadius={80}
-            fill={theme.palette.primary[200]}
-            dataKey="value"
-          />
-          <Tooltip />
-          <Legend />
-        </PieChart>
+        <Header
+          m="1.5rem"
+          title="GEOGRAPHY"
+          subtitle="Where in the world are your investments?"
+        />
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexDirection: { xs: "column", md: "row" },
+        }}
+      >
+        <Box m="1.5rem 2.5rem">
+          <TableContainer
+            component={Paper}
+            sx={{ backgroundColor: theme.palette.primary[500] }}
+          >
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Country</TableCell>
+                  <TableCell>Total Trades</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {tradesByCountry.map((country) => (
+                  <TableRow key={country.id}>
+                    <TableCell>{country.id}</TableCell>
+                    <TableCell>{country.value}</TableCell>
+                  </TableRow>
+                ))}
+                <TableRow>
+                  <TableCell>Total</TableCell>
+                  <TableCell>
+                    {tradesByCountry.reduce(
+                      (acc, country) => acc + country.value,
+                      0
+                    )}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Box>
+        <Box>
+          <PieChart width={400} height={400}>
+            <Pie
+              data={pieChartData}
+              cx="50%"
+              cy="50%"
+              labelLine={false}
+              label={(entry) => entry.id}
+              outerRadius={80}
+              fill={theme.palette.primary[200]}
+              dataKey="value"
+            />
+            <Tooltip />
+            <Legend />
+          </PieChart>
+        </Box>
       </Box>
     </Box>
   );

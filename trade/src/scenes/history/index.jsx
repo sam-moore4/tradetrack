@@ -15,6 +15,7 @@ import axios from "axios";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import DoNotDisturbAltIcon from "@mui/icons-material/DoNotDisturbAlt";
+import Header from "../../components/Header";
 
 const Active = () => {
   const userId = localStorage.getItem("userId");
@@ -41,6 +42,9 @@ const Active = () => {
 
   return (
     <Box m="1.5rem 2.5rem">
+      <Box>
+        <Header m="1.5rem" title="HISTORY" subtitle="View your past results" />
+      </Box>
       <TableContainer
         component={Paper}
         sx={{ backgroundColor: theme.palette.primary[500] }}
