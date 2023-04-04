@@ -1,2 +1,49 @@
 # tradetrack
 Trade Track is an investment and trading software designed for investors to use to track, record and analyse their past trades and view current portfolio data.
+
+**Features**
+**Key features:**
+
+Add any of your investments to our investment options
+Select the investments you have in your portfolio that you want to track
+Save your active and past investments
+Login to keep your portfolio up to date and track your profit and loss
+Data visualisation
+
+
+**Technology Used**
+
+Node JS
+Express JS
+React
+Material UI
+MongoDB
+NASDAQ Stock Data
+
+**Motivation**
+Retail traders and investors fail because they don't have a plan and they don't keep track of their trades properly. Trade track allows you to closely follow your current and past trades to analyse performance and help to improve a traders chances to make profit.
+
+Requirements
+To run this code locally you will need:
+
+Node.js
+React
+mySQL
+Installation or Getting Started
+To use this code locally, complete the following:
+
+Github clone
+
+git clone https://github.com/sam-moore4/tradetrack/
+
+open your terminal and run the following command:
+cd server 
+// to start the backend: 
+npm install
+npm run start
+
+//to start the frontend:
+cd frontend
+npm install --legacy-peer-deps
+npm start
+
