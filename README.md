@@ -46,16 +46,22 @@ git clone https://github.com/sam-moore4/tradetrack/
 
 open your terminal and run the following command:
 
+npm install
+
 npm install @emotion/react @emotion/styled @mui/icons-material @mui/material @mui/x-data-grid @nivo/bar @nivo/core @nivo/geo @nivo/pie @reduxjs/toolkit @testing-library/jest-dom @testing-library/react @testing-library/user-event react react-datepicker react-dom react-redux react-router-dom react-scripts web-vitals
 
 
 
 
 // to start the backend: 
+
 cd server 
+
 npm run dev
 
 //to start the frontend:
+
 cd frontend
+
 npm run start
 
