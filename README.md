@@ -35,14 +35,19 @@ React
 mySQL
 
 
-Installation or Getting Started
+
+**Installation or Getting Started**
 To use this code locally, complete the following:
 
-Pass on your IP address to be added to the MongoDB list.
+
+
 
 Github clone
 
 git clone https://github.com/sam-moore4/tradetrack/
+
+
+
 
 open your terminal and run the following command:
 
@@ -58,6 +63,9 @@ npm install @emotion/react @emotion/styled @mui/icons-material @mui/material @mu
 cd server 
 
 npm run dev
+
+
+
 
 //to start the frontend:
 
